@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script type="javascript" src="{% static 'js/jquery-3.6.3' %}"></script>
+{#    <link rel="stylesheet" href="{% static 'css/style.css' %}">#}
+    {% block extrehead %}
+
+    {% endblock %}
+    <title>{% block title %}
+        MeetSite
+    {% endblock %}</title>
+</head>
+<body>
+{% block header %}
+    {% include 'inc/_header.html' %}
+{% endblock %}
+<br>
+<div class="container">
+    {% block body %}
+        NONE
+    {% endblock %}
+</div>
+
+</body>
+</html>

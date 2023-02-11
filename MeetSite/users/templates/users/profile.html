@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4" style="max-height: 250px;">
+                <img src="{{ app_user.photo.url }}" class="img-fluid rounded-start" alt="..."
+                     style="object-fit: cover; height: 200px; width: 250px;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Привет, {{ app_user.username }}</h5>
+                    <p class="card-text">
+                        <small class="text-muted">Информация о тебе:</small>
+                        <span class="bio">
+                        {{ app_user.bio }}{% lorem 60 w random %}
+                        </span>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">Твой рейтинг:</small>
+                        5.0
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

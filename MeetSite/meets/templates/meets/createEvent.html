@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    Добавляем епты
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-primary btn-sm px-4 me-md-2" value="Подтвердить">
+    </form>
+{% endblock %}
+{#        <p>#}
+{#            <label for="{{ form.title.if_for_label }}">Название мероприятия:</label>#}
+{#            {{ form.title }}#}
+{#        </p>#}
+{#        <p>#}
+{#            <label for="{{ form.e_date.if_for_label }}">Дата:</label>#}
+{#            {{ form.e_date }}#}
+{#        </p>#}
+{#        <p>#}
+{#            <label for="{{ form.e_time.if_for_label }}">Время:</label>#}
+{#            {{ form.e_time }}#}
+{#        </p>#}
+{#        <p>#}
+{#            <label for="{{ form.location.if_for_label }}">Место:</label>#}
+{#            {{ form.location }}#}
+{#        </p>#}
+{#        <p>#}
+{#            <label for="{{ form.info.if_for_label }}">Информация:</label>#}
+{#            {{ form.info }}#}
+{#        </p>#}
+{#        <p>#}
+{#            <label for="{{ form.photo.if_for_label }}">Фото:</label>#}
+{#            {{ form.e_photo }}#}
+{#        </p>#}
+{#        <p>#}
+{#            <label for="{{ form.status.if_for_label }}">Статус мероприятия:</label>#}
+{#            {{ form.status }}#}
+{#        </p>#}
