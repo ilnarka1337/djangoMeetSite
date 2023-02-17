@@ -4,26 +4,38 @@
 {% block body %}
     Встречи
     <a type="button" class="btn btn-primary btn-sm px-4 me-md-2" href="{% url 'addMeet' %}">Создать встречу</a>
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-            {% for meet in meets %}
-                <div class="col">
-                    <div class="card mb-3" style="max-width: 520px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="https://rb.ru/media/upload_tmp/2018/rrr_8wF22BW.jpg" class="img-fluid"
-                                     alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ meets.title }}</h5>
-                                    <p class="card-text">{{ meets.title|truncatechars_html:150 }}</p>
-                                    <p class="card-text"><small class="text-muted">{{ meets.title }}</small></p>
-                                </div>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        {% for meet in meets %}
+            <div class="col">
+                <div class="card mb-3" style="max-width: 520px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img
+                                    {% if meet.m_photo %}
+                                        src="{{ meet.m_photo.url }}"
+                                    {% else %}
+                                        src="https://rb.ru/media/upload_tmp/2018/rrr_8wF22BW.jpg"
+                                    {% endif %}
+                                        class="img-fluid" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ meet.title|ljust:30|truncatechars_html:31 }}</h5>
+                                <p class="card-text">{{ meet.info|ljust:100|truncatechars_html:101|escape }}</p>
+                                <p class="card-text">
+                                    {{ meet.status }}
+                                    {{ meet.get_status_display }}
+                                    <small class="text-muted">{{ meet.people.count }}</small>
+                                </p>
+                                <button class="btn btn-warning btn-sm px-4 me-md-2">
+                                    <a class="nav-link" href="{{ event.get_absolute_url }}">Подробнее</a>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
 

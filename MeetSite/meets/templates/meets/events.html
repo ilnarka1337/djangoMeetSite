@@ -8,7 +8,7 @@
         {% for event in events %}
             <div class="col">
                 <div class="card mb-3" style="max-width: 520px;">
-                    <div class="row g-0">
+                    <div class="row g-0" style="height: 300px">
                         <div class="col-md-4">
                             <img
                                     {% if event.e_photo %}
@@ -19,12 +19,12 @@
                                     class="img-fluid" alt="...">
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body">
+                            <div class="card-body"  style="height: 100%">
                                 <h5 class="card-title">{{ event.title|ljust:30|truncatechars_html:31 }}</h5>
                                 <p class="card-text">{{ event.info|ljust:100|truncatechars_html:101|escape }}</p>
                                 <p class="card-text"><small class="text-muted">{{ event.willing_people.count }}</small>
                                 </p>
-                                <button class="btn btn-warning btn-sm px-4 me-md-2">
+                                <button class="mb-0 btn btn-warning btn-sm px-4 me-md-2 align-bottom">
                                     <a class="nav-link" href="{{ event.get_absolute_url }}">Подробнее</a>
                                 </button>
                             </div>

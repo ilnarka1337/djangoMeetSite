@@ -3,19 +3,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
+
 # Create your models here.
-
-STATUS_OF_MEET = {
-    (0, "Приватная встреча"),
-    (1, "Открытая встреча"),
-    (2, "Доступ по ссылке"),
-}
-
-STATUS_OF_EVENT = {
-    (0, "Приватное мероприятие"),
-    (1, "Открытое мероприятие"),
-    (2, "Доступ по ссылке"),
-}
 
 
 class Meet(models.Model):
@@ -25,12 +14,19 @@ class Meet(models.Model):
     location = models.CharField(max_length=200)
     info = models.TextField(max_length=1000)
     m_photo = models.ImageField(upload_to='photos/meets/%Y/%m/%d/', verbose_name='Фото', blank=True)
-    meet_event = models.ManyToManyField('Event', blank=True)
+    meet_event = models.ForeignKey('Event', blank=True, null=True, on_delete=models.CASCADE,
+                                   verbose_name="Связанное мероприятие", related_name="event_linked_meets")
     views = models.IntegerField(default=0, verbose_name='Просмотры')
+    STATUS_OF_MEET = {
+        ('0', "Приватная встреча"),
+        ('1', "Открытая встреча"),
+        ('2', "Доступ по ссылке"),
+    }
     status = models.CharField(choices=STATUS_OF_MEET, default=0, verbose_name='Статус', max_length=30)
     owner = models.ForeignKey(MeetsUser, related_name='created_meets', on_delete=models.CASCADE,
                               verbose_name='Создатель', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', null=True, blank=True)
+    people = models.ManyToManyField(MeetsUser, blank=True, verbose_name="Участники встречи", related_name="meet_users")
 
     def __str__(self):
         return self.title
@@ -40,11 +36,6 @@ class Meet(models.Model):
         verbose_name_plural = 'встречи'
 
 
-class Meet_people(models.Model):
-    meet = models.ForeignKey(Meet, verbose_name="Встреча", on_delete=models.CASCADE)
-    person = models.ManyToManyField(MeetsUser, verbose_name="Люди")
-
-
 class Event(models.Model):
     title = models.CharField(max_length=100, blank=False, verbose_name="Название")
     e_date = models.DateField(blank=True)
@@ -52,12 +43,17 @@ class Event(models.Model):
     location = models.CharField(max_length=200)
     info = models.TextField(max_length=1000, blank=True)
     e_photo = models.ImageField(upload_to='photos/events/%Y/%m/%d/', verbose_name='Фото', blank=True)
-    willing_people = models.ManyToManyField(MeetsUser, blank=True)
     views = models.IntegerField(default=0, verbose_name='Просмотры')
+    STATUS_OF_EVENT = {
+        ('0', "Приватное мероприятие"),
+        ('1', "Открытое мероприятие"),
+        ('2', "Доступ по ссылке"),
+    }
     status = models.CharField(choices=STATUS_OF_EVENT, default=0, verbose_name='Статус', max_length=30)
     owner = models.ForeignKey(MeetsUser, related_name='created_events', on_delete=models.CASCADE,
                               verbose_name='Создатель', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', null=True, blank=True)
+    willing_people = models.ManyToManyField(MeetsUser, blank=True)
 
     def get_absolute_url(self):
         return reverse('viewEvent', kwargs={"pk": self.pk})
