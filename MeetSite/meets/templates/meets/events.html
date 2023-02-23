@@ -24,7 +24,7 @@
                                 <p class="card-text">{{ event.info|ljust:100|truncatechars_html:101|escape }}</p>
                                 <p class="card-text"><small class="text-muted">{{ event.willing_people.count }}</small>
                                 </p>
-                                <button class="mb-0 btn btn-warning btn-sm px-4 me-md-2 align-bottom">
+                                <button class="mb-0 btn btn-warning btn-sm px-4 me-md-2">
                                     <a class="nav-link" href="{{ event.get_absolute_url }}">Подробнее</a>
                                 </button>
                             </div>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal">{{ meet.title }}</h1>
+        <img src="{{ meet.m_photo.url }}" alt="" height="500" width="500">
+        <p class="fs-5 text-muted">{{ meet.info }}</p>
+    </div>
+    <div>
+        Связанное мероприятие
+        <a href="{{ meet.meet_event.get_absolute_url }}">{{ meet.meet_event }}</a>
+    </div>
+    Участники встречи
+    <br>
+    {% for ppl in meet.people.all %}
+        <a href="{{ ppl.photo.url }}"><img src="{{ ppl.photo.url }}" alt="" width="50" height="50"
+                                           class="object-fit-cover" style="border-radius: 50%"></a>
+        {{ ppl.username }}
+    {% endfor %}
+{% endblock %}

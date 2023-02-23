@@ -61,3 +61,13 @@ class MeetsListView(ListView):
 
     def get_queryset(self):
         return Meet.objects.all()
+
+
+class MeetDetailView(DetailView):
+    model = Meet
+    context_object_name = 'meet'
+    template_name = 'meets/viewMeet.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MeetDetailView, self).get_context_data()
+        return context

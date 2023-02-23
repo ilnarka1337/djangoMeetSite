@@ -28,6 +28,9 @@ class Meet(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', null=True, blank=True)
     people = models.ManyToManyField(MeetsUser, blank=True, verbose_name="Участники встречи", related_name="meet_users")
 
+    def get_absolute_url(self):
+        return reverse('viewMeet', kwargs={"pk": self.pk})
+
     def __str__(self):
         return self.title
 

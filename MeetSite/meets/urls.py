@@ -9,4 +9,5 @@ urlpatterns = [
     path('add-event/', EventCreateView.as_view(), name='addEvent'),
     path('add-meet/', MeetCreateView.as_view(), name='addMeet'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='viewEvent'),
+    path('meet/<int:pk>/', MeetDetailView.as_view(), name='viewMeet'),
 ]
