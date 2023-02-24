@@ -3,7 +3,7 @@ from meets.models import *
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ("title", "e_date", "e_photo")
+    list_display = ("title", "date", "photo")
 
 
 # Register your models here.

@@ -12,4 +12,4 @@ class EventCreateForm(ModelForm):
 class MeetCreateForm(ModelForm):
     class Meta:
         model = Meet
-        fields = ('title', 'meet_event', 'm_date', 'm_time', 'location', 'info', 'm_photo', 'status')
+        fields = ('title', 'meet_event', 'date', 'time', 'location', 'info', 'photo', 'status')

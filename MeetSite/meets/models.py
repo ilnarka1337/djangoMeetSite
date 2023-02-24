@@ -9,11 +9,11 @@ from django.utils import timezone
 
 class Meet(models.Model):
     title = models.CharField(max_length=100, blank=False, verbose_name='Название')
-    m_date = models.DateField(blank=False)
-    m_time = models.TimeField(blank=False)
+    date = models.DateField(blank=False)
+    time = models.TimeField(blank=False)
     location = models.CharField(max_length=200)
     info = models.TextField(max_length=1000)
-    m_photo = models.ImageField(upload_to='photos/meets/%Y/%m/%d/', verbose_name='Фото', blank=True)
+    photo = models.ImageField(upload_to='photos/meets/%Y/%m/%d/', verbose_name='Фото', blank=True)
     meet_event = models.ForeignKey('Event', blank=True, null=True, on_delete=models.CASCADE,
                                    verbose_name="Связанное мероприятие", related_name="event_linked_meets")
     views = models.IntegerField(default=0, verbose_name='Просмотры')
@@ -41,11 +41,11 @@ class Meet(models.Model):
 
 class Event(models.Model):
     title = models.CharField(max_length=100, blank=False, verbose_name="Название")
-    e_date = models.DateField(blank=True)
-    e_time = models.TimeField(blank=True)
+    date = models.DateField(blank=True)
+    time = models.TimeField(blank=True)
     location = models.CharField(max_length=200)
     info = models.TextField(max_length=1000, blank=True)
-    e_photo = models.ImageField(upload_to='photos/events/%Y/%m/%d/', verbose_name='Фото', blank=True)
+    photo = models.ImageField(upload_to='photos/events/%Y/%m/%d/', verbose_name='Фото', blank=True)
     views = models.IntegerField(default=0, verbose_name='Просмотры')
     STATUS_OF_EVENT = {
         ('0', "Приватное мероприятие"),
@@ -67,4 +67,4 @@ class Event(models.Model):
     class Meta:
         verbose_name = 'ивент'
         verbose_name_plural = 'ивенты'
-        ordering = ['e_date']
+        ordering = ['date']

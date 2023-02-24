@@ -15,10 +15,11 @@ class UserSerializer(serializers.ModelSerializer):
 class EventSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     views = serializers.ReadOnlyField()
+    status = serializers.ChoiceField(choices=Event.STATUS_OF_EVENT, source='get_status_display')
 
     class Meta:
         model = Event
-        fields = ['id', 'title', 'e_date', 'e_time', 'owner', 'views', 'status']
+        fields = ['id', 'title', 'date', 'time', 'owner', 'views', 'status']
 
 
 class MeetSerializer(serializers.ModelSerializer):
@@ -28,4 +29,4 @@ class MeetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Meet
-        fields = ['id', 'title', 'm_date', 'm_time', 'meet_event', 'owner', 'status', 'people']
+        fields = ['id', 'title', 'date', 'time', 'meet_event', 'owner', 'status', 'people']

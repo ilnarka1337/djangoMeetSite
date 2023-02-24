@@ -8,22 +8,25 @@
         {% for event in events %}
             <div class="col">
                 <div class="card mb-3" style="max-width: 520px;">
-                    <div class="row g-0" style="height: 300px">
+                    <div class="row g-0" style="height: 400px">
                         <div class="col-md-4">
                             <img
-                                    {% if event.e_photo %}
-                                        src="{{ event.e_photo.url }}"
+                                    {% if event.photo %}
+                                        src="{{ event.photo.url }}"
                                     {% else %}
                                         src="https://rb.ru/media/upload_tmp/2018/rrr_8wF22BW.jpg"
                                     {% endif %}
-                                    class="img-fluid" alt="...">
+                                    class="img-fluid ms-3 mt-3" alt="...">
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body"  style="height: 100%">
-                                <h5 class="card-title">{{ event.title|ljust:30|truncatechars_html:31 }}</h5>
-                                <p class="card-text">{{ event.info|ljust:100|truncatechars_html:101|escape }}</p>
-                                <p class="card-text"><small class="text-muted">{{ event.willing_people.count }}</small>
+                            <div class="card-body ms-3"  style="height: 100%">
+                                <h5 class="card-title" style="height: 50px">{{ event.title|ljust:30|truncatechars_html:31 }}</h5>
+                                <p class="card-text" style="height: 100px">{{ event.info|ljust:100|truncatechars_html:101|escape }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">{{ event.willing_people.count }}</small>
                                 </p>
+                                <p class="card-text"><small class="text-muted">{{ event.date }}</small></p>
+                                <p class="card-text"><small class="text-muted">{{ event.time }}</small></p>
                                 <button class="mb-0 btn btn-warning btn-sm px-4 me-md-2">
                                     <a class="nav-link" href="{{ event.get_absolute_url }}">Подробнее</a>
                                 </button>
